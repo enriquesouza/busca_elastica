@@ -1,0 +1,12 @@
+var chave = {
+"NomeChave": "",
+"properties" : new Object()
+};
+var mapping = {
+"Propriedade" : {
+"type" : "string", //type: string, integer, long, float, double, boolean, date, datetime, binary
+"store":"yes", //yes, no
+"index":"not_analyzed", //not_analyzed, analyzed, no,
+"boost" : "1.0" //1.0,2.0
+}
+};
