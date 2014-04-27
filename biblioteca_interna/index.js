@@ -8,7 +8,7 @@ var Indexador =
         var existe = false;
         for (var i = 0; i <= this.chavesEncontradas.length; i++) {
             var chave = this.chavesEncontradas[i];
-            if (typeof (chave) != 'undefined' && chave != null && $.isPlainObject(chave) && chave.NomeChave == nomeChave) {
+            if (typeof (chave) != 'undefined' && chave != null && $jq.isPlainObject(chave) && chave.NomeChave == nomeChave) {
                 existe = true;
                 break;
             }
@@ -55,33 +55,33 @@ var Indexador =
     }
 };
 
-$(document).ready(function () {
-    $("#btnParsearAquivoJson").click(function () {
+$jq(document).ready(function () {
+    $jq("#btnParsearAquivoJson").click(function () {
 
-        var url = $("#selectNomeJson").val();
+        var url = $jq("#selectNomeJson").val();
 
         Util.buscarAjaxComGet(url,
             function (data) {
-                $('.carregando').html("");
+                $jq('.carregando').html("");
                 Indexador.chavesEncontradas = new Array();
                 var chavesEncontradas = Indexador.buscarChavesJson(data, "");
-                $("#tabelaChavesObjeto").empty();
-                $("#tmplChavesObjeto").tmpl(chavesEncontradas).appendTo("#tabelaChavesObjeto");
-                $("#hddJsonParseado").val(JSON.stringify(data));
+                $jq("#tabelaChavesObjeto").empty();
+                $jq("#tmplChavesObjeto").tmpl(chavesEncontradas).appendTo("#tabelaChavesObjeto");
+                $jq("#hddJsonParseado").val(JSON.stringify(data));
             },
             function (XMLHttpRequest, textStatus, errorThrown) {
-                $('.carregando').html("Erro ao carregar");
+                $jq('.carregando').html("Erro ao carregar");
             },
             function (XMLHttpRequest) {
-                $('.carregando').html("Buscando as chaves do objeto...");
+                $jq('.carregando').html("Buscando as chaves do objeto...");
             },
             function (XMLHttpRequest, textStatus) {
-                $('.carregando').html("");
+                $jq('.carregando').html("");
             }
         );
 
         /*
-         $.ajax({
+         $jq.ajax({
          type: "GET",
          url: url,
          data: {},
@@ -89,32 +89,32 @@ $(document).ready(function () {
          contentType: "application/json; charset=utf-8",
          dataType: "json",
          success: function (data) {
-         $('.carregando').html("");
+         $jq('.carregando').html("");
          var chavesEncontradas = Indexador.buscarChavesJson(data, "");
-         $("#tmplChavesObjeto").tmpl(chavesEncontradas).appendTo("#tabelaChavesObjeto");
-         $("#hddJsonParseado").val(JSON.stringify(data));
+         $jq("#tmplChavesObjeto").tmpl(chavesEncontradas).appendTo("#tabelaChavesObjeto");
+         $jq("#hddJsonParseado").val(JSON.stringify(data));
          },
          error: function (XMLHttpRequest, textStatus, errorThrown) {
-         $('.carregando').html("Erro ao carregar");
+         $jq('.carregando').html("Erro ao carregar");
          },
          beforeSend: function (XMLHttpRequest) {
-         $('.carregando').html("Buscando as chaves do objeto...");
+         $jq('.carregando').html("Buscando as chaves do objeto...");
          },
          complete: function (XMLHttpRequest, textStatus) {
-         $('.carregando').html("");
+         $jq('.carregando').html("");
          }
          });*/
 
     });
-    $("#btnGerarIndiceJson").click(function () {
+    $jq("#btnGerarIndiceJson").click(function () {
         var urlIndice = 'http://ubuntuserver:9200/nike/busca_produto/';
-        $.each(data.root.produto, function (index, produto) {
+        $jq.each(data.root.produto, function (index, produto) {
             Util.enviarAjaxComPut(
                 urlIndice.concat(produto.id_produto),
                 produto,
                 function (result) {
 
-                    $('.carregando').html("indexando os objetos... :  objeto ".concat(produto.id_produto).concat(" indexado com sucesso."));
+                    $jq('.carregando').html("indexando os objetos... :  objeto ".concat(produto.id_produto).concat(" indexado com sucesso."));
 
                     if (result.success == true) {
                         //console.log("criou o indice para o ".concat(produto.id_produto));
@@ -123,15 +123,15 @@ $(document).ready(function () {
                 function (result) {
                     console.log(result);
                 }, function (XMLHttpRequest) {
-                    $('.carregando').html("indexando os objetos...");
+                    $jq('.carregando').html("indexando os objetos...");
                 },
                 function (XMLHttpRequest, textStatus) {
-                    $('.carregando').html("");
+                    $jq('.carregando').html("");
                 }
             );
 
             /*
-             $.ajax({
+             $jq.ajax({
              url: urlIndice.concat(produto.id_produto),
              type: 'PUT',
              crossDomain: true,

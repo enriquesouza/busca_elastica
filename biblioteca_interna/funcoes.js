@@ -1,16 +1,16 @@
-/// <reference path="..\biblioteca_externa\jquery-2.1.0-vsdoc.js" />
+var $jq = jQuery.noConflict();
 var Util = {
     estaDefinido: function (objeto) {
         return (typeof (objeto) != 'undefined' && objeto != null);
     },
     estaDefinidoComoObjeto: function (objeto) {
-        return (this.estaDefinido(objeto) && $.isPlainObject(objeto));
+        return (this.estaDefinido(objeto) && $jq.isPlainObject(objeto));
     },
     estaDefinidoComoArray: function (objeto) {
-        return (this.estaDefinido(objeto) && $.isArray(objeto));
+        return (this.estaDefinido(objeto) && $jq.isArray(objeto));
     },
     estaDefinidoComoFuncao: function (objeto) {
-        return (this.estaDefinido(objeto) && $.isFunction(objeto));
+        return (this.estaDefinido(objeto) && $jq.isFunction(objeto));
     },
     estaVazio: function (objeto) {
         return (this.estaDefinido(objeto) && objeto == '');
@@ -23,14 +23,14 @@ var Util = {
     },
     adicionarTagAoHeader: function (tag) {
         if (this.estaDefinido(tag)) {
-            $("head").append(tag);
+            $jq("head").append(tag);
         }
     },
     carregarJavascript: function (src) {
-        this.adicionarTagAoHeader($("<script />", { 'type': 'text/javascript', 'src': src }));
+        this.adicionarTagAoHeader($jq("<script />", { 'type': 'text/javascript', 'src': src }));
     },
     carregarCss: function (src) {
-        this.adicionarTagAoHeader($("<link />", { 'rel': 'stylesheet', 'href': src, 'type': "text/css" }));
+        this.adicionarTagAoHeader($jq("<link />", { 'rel': 'stylesheet', 'href': src, 'type': "text/css" }));
     },
     buscarAjaxComGet: function (url, funcaoSucesso, funcaoErro, funcaoAntesChamada, funcaoChamadaCompleta) {
 
@@ -39,7 +39,7 @@ var Util = {
         if (!this.estaDefinidoComoFuncao(funcaoAntesChamada)) throw "O parâmetro funcaoAntesChamada não está definido como função.";
         if (!this.estaDefinidoComoFuncao(funcaoChamadaCompleta)) throw "O parâmetro funcaoChamadaCompleta não está definido como função.";
 
-        $.ajax({
+        $jq.ajax({
             type: "GET",
             url: url,
             data: {},
@@ -60,7 +60,7 @@ var Util = {
         if (!this.estaDefinidoComoFuncao(funcaoChamadaCompleta)) throw "O parâmetro funcaoChamadaCompleta não está definido como função.";
         if (!this.estaDefinidoComoObjeto(dadoJson)) throw "O parâmetro dadoJson não está definido como objeto JSON.";
 
-        $.ajax({
+        $jq.ajax({
             url: url,
             type: 'PUT',
             crossDomain: true,
