@@ -10,6 +10,6 @@
 <script src="biblioteca_interna/views/presenterAbstract.js"></script>
 <script src="biblioteca_interna/views/busca/buscaPresenter.js"></script>
 <label for="txtBusca">Buscar: <input type="text" id="txtBusca"/></label>
-<input type="button" id="btnBuscar" value="Buscar"/>
+<input type="button" id="btnBusca" value="Buscar"/>
 </body>
 </html>
